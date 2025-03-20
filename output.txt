@@ -1,0 +1,5 @@
+-rwxrwxrwx init
+brw------- loop0
+crw-r--r-- autofs
+drwxr-xr-x Docker
+lrwxrwxrwx usr/bin
