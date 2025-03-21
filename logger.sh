@@ -35,7 +35,7 @@ log_command lscpu
 
 log_command date
 log_command >out.txt
-log_command 'ls -lR / 2>/dev/null | grep -E "^[-]" -m 1 | awk '\''{print $1, "/"$NF}'\'' >> out.txt'
+log_command 'ls -lR / 2>/dev/null | grep -E "^[-]" -m 1 | awk '\''{print $1, "/"$NF}'\'' >> out.txt && date'
 log_command 'ls -lR / 2>/dev/null | grep -E "^[b]" -m 1 | awk '\''{print $1, "/"$NF}'\'' >> out.txt'
 log_command 'ls -lR / 2>/dev/null | grep -E "^[c]" -m 1 | awk '\''{print $1, "/"$NF}'\'' >> out.txt'
 log_command 'ls -lR / 2>/dev/null | grep -E "^[d]" -m 1 | awk '\''{print $1, "/"$NF}'\'' >> out.txt'

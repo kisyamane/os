@@ -3,7 +3,7 @@ kisyamane@WIN-56M78DILK3P:~/os$ echo Лабораторная работа 1: Ф
 kisyamane@WIN-56M78DILK3P:~/os$ echo Сербиновский Юрий гр. 3344
 Сербиновский Юрий гр. 3344
 kisyamane@WIN-56M78DILK3P:~/os$ date
-Fri Mar 21 20:52:28 MSK 2025
+Fri Mar 21 22:53:31 MSK 2025
 kisyamane@WIN-56M78DILK3P:~/os$ who
 kisyamane@WIN-56M78DILK3P:~/os$ uname -a
 Linux WIN-56M78DILK3P 5.15.153.1-microsoft-standard-WSL2 #1 SMP Fri Mar 29 23:14:13 UTC 2024 x86_64 x86_64 x86_64 GNU/Linux
@@ -45,9 +45,10 @@ Vulnerability Spectre v2:           Mitigation; Enhanced IBRS, IBPB conditional,
 Vulnerability Srbds:                Not affected
 Vulnerability Tsx async abort:      Not affected
 kisyamane@WIN-56M78DILK3P:~/os$ date
-Fri Mar 21 20:52:28 MSK 2025
+Fri Mar 21 22:53:31 MSK 2025
 kisyamane@WIN-56M78DILK3P:~/os$ 
-kisyamane@WIN-56M78DILK3P:~/os$ ls -lR / 2>/dev/null | grep -E "^[-]" -m 1 | awk '{print $1, "/"$NF}' >> out.txt
+kisyamane@WIN-56M78DILK3P:~/os$ ls -lR / 2>/dev/null | grep -E "^[-]" -m 1 | awk '{print $1, "/"$NF}' >> out.txt && date
+Fri Mar 21 22:53:31 MSK 2025
 kisyamane@WIN-56M78DILK3P:~/os$ ls -lR / 2>/dev/null | grep -E "^[b]" -m 1 | awk '{print $1, "/"$NF}' >> out.txt
 kisyamane@WIN-56M78DILK3P:~/os$ ls -lR / 2>/dev/null | grep -E "^[c]" -m 1 | awk '{print $1, "/"$NF}' >> out.txt
 kisyamane@WIN-56M78DILK3P:~/os$ ls -lR / 2>/dev/null | grep -E "^[d]" -m 1 | awk '{print $1, "/"$NF}' >> out.txt
