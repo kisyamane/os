@@ -23,8 +23,8 @@ echo "Поиск жёстких ссылок на файл: $target_file (inode:
 
 # Способ 1: Использование ls и awk
 echo "Способ 1: Использование ls и awk"
-ls -lRi / | awk -v inode="$target_inode" '$1 == inode {print $0}'
+ls -lRi / 2>/dev/null | awk -v inode="$target_inode" '$1 == inode {print $0}'
 
 # Способ 2: Использование ls и grep
 echo "Способ 2: Использование ls и grep"
-ls -lRi / | grep -E "^ *$target_inode "
+ls -lRi / 2>/dev/null | grep -E "^ *$target_inode "
