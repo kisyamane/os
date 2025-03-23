@@ -1,14 +1,15 @@
-kisyamane@Ubuntu:~/os$ echo Лабораторная работа 1: Файловые системы Unix-подобных ОС.
 Лабораторная работа 1: Файловые системы Unix-подобных ОС.
-kisyamane@Ubuntu:~/os$ echo Сербиновский Юрий гр. 3344
 Сербиновский Юрий гр. 3344
+
 kisyamane@Ubuntu:~/os$ who && date
 kisyamane seat0        2025-03-21 23:36 (login screen)
 kisyamane tty2         2025-03-21 23:36 (tty2)
-Сб 22 мар 2025 01:09:47 MSK
+Вс 23 мар 2025 01:55:44 MSK
+
 kisyamane@Ubuntu:~/os$ uname -a && date
 Linux Ubuntu 6.11.0-17-generic #17~24.04.2-Ubuntu SMP PREEMPT_DYNAMIC Mon Jan 20 22:48:29 UTC 2 x86_64 x86_64 x86_64 GNU/Linux
-Сб 22 мар 2025 01:09:47 MSK
+Вс 23 мар 2025 01:55:44 MSK
+
 kisyamane@Ubuntu:~/os$ lscpu && date
 Архитектура:                          x86_64
 CPU op-mode(s):                       32-bit, 64-bit
@@ -48,17 +49,447 @@ Vulnerability Spectre v1:             Mitigation; usercopy/swapgs barriers and _
 Vulnerability Spectre v2:             Mitigation; Enhanced / Automatic IBRS; RSB filling; PBRSB-eIBRS SW sequence; BHI SW loop, KVM SW loop
 Vulnerability Srbds:                  Not affected
 Vulnerability Tsx async abort:        Not affected
-Сб 22 мар 2025 01:09:47 MSK
+Вс 23 мар 2025 01:55:44 MSK
+
+# Задание 1
+
+kisyamane@Ubuntu:~/os$ date
+Вс 23 мар 2025 01:55:44 MSK
+kisyamane@Ubuntu:~/os$ ls -lR / 2>/dev/null | grep -E "^[-]" -m 1 | awk '{print $1, "/"$NF}' >> out.txt && date
+Вс 23 мар 2025 01:55:44 MSK
+kisyamane@Ubuntu:~/os$ ls -lR / 2>/dev/null | grep -E "^[b]" -m 1 | awk '{print $1, "/"$NF}' >> out.txt && date
+Вс 23 мар 2025 01:55:44 MSK
+kisyamane@Ubuntu:~/os$ ls -lR / 2>/dev/null | grep -E "^[c]" -m 1 | awk '{print $1, "/"$NF}' >> out.txt && date
+Вс 23 мар 2025 01:55:44 MSK
+kisyamane@Ubuntu:~/os$ ls -lR / 2>/dev/null | grep -E "^[d]" -m 1 | awk '{print $1, "/"$NF}' >> out.txt && date
+Вс 23 мар 2025 01:55:44 MSK
+kisyamane@Ubuntu:~/os$ ls -lR / 2>/dev/null | grep -E "^[l]" -m 1 | awk '{print $1, "/"$NF}' >> out.txt && date
+Вс 23 мар 2025 01:55:44 MSK
+kisyamane@Ubuntu:~/os$ ls -lR / 2>/dev/null | grep -E "^[p]" -m 1 | awk '{print $1, "/"$NF}' >> out.txt && date
+Вс 23 мар 2025 01:55:46 MSK
+kisyamane@Ubuntu:~/os$ ls -lR / 2>/dev/null | grep -E "^[s]" -m 1 | awk '{print $1, "/"$NF}' >> out.txt && date
+Вс 23 мар 2025 01:55:48 MSK
+kisyamane@Ubuntu:~/os$ cat out.txt && date
+-rw-r--r-- /config-6.11.0-17-generic
+brw-rw---- /loop0
+crw-r--r-- /autofs
+drwxr-xr-x /bin.usr-is-merged
+lrwxrwxrwx /usr/bin
+prw------- /initctl
+srw-rw-rw- /snapd-snap.socket
+Вс 23 мар 2025 01:55:48 MSK
+kisyamane@Ubuntu:~/os$ bash task1.sh out.txt && date
+Вс 23 мар 2025 01:55:48 MSK
+kisyamane@Ubuntu:~/os$ cat out.txt && date
+-rw-r--r-- /config-6.11.0-17-generic
+brw-rw---- /loop0
+crw-r--r-- /autofs
+drwxr-xr-x /bin.usr-is-merged
+lrwxrwxrwx /usr/bin
+Вс 23 мар 2025 01:55:49 MSK
+
+# Задание 2
+
+kisyamane@Ubuntu:~/os$ bash task2.sh out.txt && date
+Поиск жёстких ссылок на файл: /home/kisyamane/leti/os/out.txt (inode: 917848)
+Способ 1: Использование ls и awk
+917848 -rw-rw-r-- 3 kisyamane kisyamane   124 мар 23 01:55 out.txt
+917848 -rw-rw-r-- 3 kisyamane kisyamane  124 мар 23 01:55 link1
+917848 -rw-rw-r-- 3 kisyamane kisyamane 124 мар 23 01:55 link2
+Способ 2: Использование ls и grep
+917848 -rw-rw-r-- 3 kisyamane kisyamane   124 мар 23 01:55 out.txt
+917848 -rw-rw-r-- 3 kisyamane kisyamane  124 мар 23 01:55 link1
+917848 -rw-rw-r-- 3 kisyamane kisyamane 124 мар 23 01:55 link2
+Вс 23 мар 2025 01:56:18 MSK
+
+# Задание 3
+
 kisyamane@Ubuntu:~/os$ touch l.txt && date
-Сб 22 мар 2025 01:09:47 MSK
+touch: невозможно выполнить touch для 'l.txt': Отказано в доступе
 kisyamane@Ubuntu:~/os$ ln -s l.txt s1 && date
-Сб 22 мар 2025 01:09:47 MSK
+ln: не удалось создать символьную ссылку 's1': Файл существует
 kisyamane@Ubuntu:~/os$ cp -s l.txt s2 && date
-Сб 22 мар 2025 01:09:47 MSK
+cp: невозможно создать символьную ссылку 's2' на 'l.txt': Файл существует
 kisyamane@Ubuntu:~/os$ link l.txt s3 && date
-Сб 22 мар 2025 01:09:47 MSK
-kisyamane@Ubuntu:~/os$ bash task3.sh l.txt
+link: невозможно создать ссылку 's3' на 'l.txt': Файл существует
+kisyamane@Ubuntu:~/os$ bash task3.sh l.txt && date
 Поиск символьных ссылок на файл /home/kisyamane/leti/os/l.txt
 /home/kisyamane/leti/os/s2
 /home/kisyamane/leti/os/s1
 Всего символических ссылок: 2
+Вс 23 мар 2025 01:56:19 MSK
+
+# Задание 4
+
+kisyamane@Ubuntu:~/os$ bash task4.sh l.txt && date
+Способ 1: Использование find с lname
+/home/kisyamane/leti/os/s2
+/home/kisyamane/leti/os/s1
+Способ 2: Использование ls и grep
+lrwxrwxrwx 1 root      root          5 мар 23 01:47 s1 -> l.txt
+lrwxrwxrwx 1 root      root          5 мар 23 01:47 s2 -> l.txt
+Вс 23 мар 2025 01:56:48 MSK
+
+# Задание 5
+
+kisyamane@Ubuntu:~/os$ find / -type f 2>/dev/null | head -n 10 && date
+/snap/README
+/snap/firmware-updater/167/bin/data/flutter_assets/AssetManifest.bin
+/snap/firmware-updater/167/bin/data/flutter_assets/AssetManifest.json
+/snap/firmware-updater/167/bin/data/flutter_assets/FontManifest.json
+/snap/firmware-updater/167/bin/data/flutter_assets/NOTICES.Z
+/snap/firmware-updater/167/bin/data/flutter_assets/assets/firmware-updater-app.desktop
+/snap/firmware-updater/167/bin/data/flutter_assets/assets/firmware-updater.desktop
+/snap/firmware-updater/167/bin/data/flutter_assets/fonts/MaterialIcons-Regular.otf
+/snap/firmware-updater/167/bin/data/flutter_assets/packages/handy_window/assets/handy-window-dark.css
+/snap/firmware-updater/167/bin/data/flutter_assets/packages/handy_window/assets/handy-window.css
+Вс 23 мар 2025 01:57:11 MSK
+kisyamane@Ubuntu:~/os$ find / -type b 2>/dev/null  | head -n 5 && date
+/run/systemd/inaccessible/blk
+/dev/loop0
+/dev/loop1
+/dev/loop2
+/dev/loop3
+Вс 23 мар 2025 01:57:23 MSK
+kisyamane@Ubuntu:~/os$ find / -type c 2>/dev/null  | head -n 5 && date
+/snap/core22/1748/dev/null
+/snap/core22/1748/dev/random
+/snap/core22/1748/dev/urandom
+/snap/core22/1748/dev/zero
+/snap/core20/2496/dev/null
+Вс 23 мар 2025 01:57:33 MSK
+kisyamane@Ubuntu:~/os$ find / -type d 2>/dev/null  | head -n 5 && date
+/
+/snap
+/snap/firmware-updater
+/snap/firmware-updater/167
+/snap/firmware-updater/167/bin
+Вс 23 мар 2025 01:57:33 MSK
+kisyamane@Ubuntu:~/os$ find / -type l 2>/dev/null  | head -n 5 && date
+/snap/firmware-updater/current
+/snap/snapd-desktop-integration/current
+/snap/snapd-desktop-integration/253/usr/lib/x86_64-linux-gnu/libsnapd-glib-2.so.1
+/snap/core22/1748/bin
+/snap/core22/1748/etc/apparmor/init/network-interface-security/sbin.dhclient
+Вс 23 мар 2025 01:57:33 MSK
+kisyamane@Ubuntu:~/os$ find / -type p 2>/dev/null  | head -n 5 && date
+/run/systemd/inaccessible/fifo
+/run/systemd/sessions/2.ref
+/run/systemd/inhibit/1.ref
+/run/systemd/inhibit/2.ref
+/run/systemd/inhibit/3.ref
+Вс 23 мар 2025 01:57:40 MSK
+kisyamane@Ubuntu:~/os$ find / -type s 2>/dev/null  | head -n 5 && date
+/run/udev/control
+/run/systemd/inaccessible/sock
+/run/systemd/notify
+/run/systemd/private
+/run/systemd/userdb/io.systemd.DynamicUser
+Вс 23 мар 2025 01:57:53 MSK
+
+# Задание 6
+
+kisyamane@Ubuntu:~/os$ echo "Hello, world!" >> a.txt && date
+Вс 23 мар 2025 01:57:53 MSK
+kisyamane@Ubuntu:~/os$ od a.txt && date
+0000000 062510 066154 026157 073440 071157 062154 005041 062510
+0000020 066154 026157 073440 071157 062154 005041 062510 066154
+0000040 026157 073440 071157 062154 005041 062510 066154 026157
+0000060 073440 071157 062154 005041
+0000070
+Вс 23 мар 2025 01:57:53 MSK
+kisyamane@Ubuntu:~/os$ od -c a.txt && date
+0000000   H   e   l   l   o   ,       w   o   r   l   d   !  \n   H   e
+0000020   l   l   o   ,       w   o   r   l   d   !  \n   H   e   l   l
+0000040   o   ,       w   o   r   l   d   !  \n   H   e   l   l   o   ,
+0000060       w   o   r   l   d   !  \n
+0000070
+Вс 23 мар 2025 01:57:53 MSK
+kisyamane@Ubuntu:~/os$ hexdump -C a.txt && date
+00000000  48 65 6c 6c 6f 2c 20 77  6f 72 6c 64 21 0a 48 65  |Hello, world!.He|
+00000010  6c 6c 6f 2c 20 77 6f 72  6c 64 21 0a 48 65 6c 6c  |llo, world!.Hell|
+00000020  6f 2c 20 77 6f 72 6c 64  21 0a 48 65 6c 6c 6f 2c  |o, world!.Hello,|
+00000030  20 77 6f 72 6c 64 21 0a                           | world!.|
+00000038
+Вс 23 мар 2025 01:57:53 MSK
+kisyamane@Ubuntu:~/os$ mkdir test_dir && date
+mkdir: невозможно создать каталог «test_dir»: Файл существует
+kisyamane@Ubuntu:~/os$ sudo od /dev/loop0 | head -n 5 && date
+0000000 071550 071561 000035 000000 036213 054570 000000 000002
+0000020 000001 000000 000004 000021 001300 000001 000004 000000
+0000040 001600 000000 000000 000000 001670 000000 000000 000000
+0000060 001660 000000 000000 000000 177777 177777 177777 177777
+0000100 000322 000000 000000 000000 000740 000000 000000 000000
+Вс 23 мар 2025 01:57:53 MSK
+kisyamane@Ubuntu:~/os$ sudo od /dev/fb0 | head -n 5 && date
+0000000 000000 000000 000000 000000 000000 000000 000000 000000
+*
+17500000
+Вс 23 мар 2025 01:57:53 MSK
+
+# Задание 7
+
+kisyamane@Ubuntu:~/os$ bash task7.sh && date
+Создан каталог mydir.
+Начальный размер каталога:
+4,0K	mydir
+Добавлено 10 файлов.
+44K	mydir
+Удалено 10 файлов.
+4,0K	mydir
+Добавлен подкаталог subdir.
+8,0K	mydir
+Удален подкаталог subdir.
+4,0K	mydir
+Каталог mydir удален.
+Вс 23 мар 2025 01:57:53 MSK
+
+# Задание 8
+
+kisyamane@Ubuntu:~/os$ ls -l /etc/passwd && date
+-rw-r--r-- 1 root root 2990 мар 14 22:20 /etc/passwd
+Вс 23 мар 2025 01:57:53 MSK
+kisyamane@Ubuntu:~/os$ ls -l /etc/shadow && date
+-rw-r----- 1 root shadow 1390 мар 22 20:27 /etc/shadow
+Вс 23 мар 2025 01:57:53 MSK
+kisyamane@Ubuntu:~/os$ ls -l usr/bin/passwd && date
+ls: невозможно получить доступ к 'usr/bin/passwd': Нет такого файла или каталога
+kisyamane@Ubuntu:~/os$ cat /etc/passwd && date
+root:x:0:0:root:/root:/bin/bash
+daemon:x:1:1:daemon:/usr/sbin:/usr/sbin/nologin
+bin:x:2:2:bin:/bin:/usr/sbin/nologin
+sys:x:3:3:sys:/dev:/usr/sbin/nologin
+sync:x:4:65534:sync:/bin:/bin/sync
+games:x:5:60:games:/usr/games:/usr/sbin/nologin
+man:x:6:12:man:/var/cache/man:/usr/sbin/nologin
+lp:x:7:7:lp:/var/spool/lpd:/usr/sbin/nologin
+mail:x:8:8:mail:/var/mail:/usr/sbin/nologin
+news:x:9:9:news:/var/spool/news:/usr/sbin/nologin
+uucp:x:10:10:uucp:/var/spool/uucp:/usr/sbin/nologin
+proxy:x:13:13:proxy:/bin:/usr/sbin/nologin
+www-data:x:33:33:www-data:/var/www:/usr/sbin/nologin
+backup:x:34:34:backup:/var/backups:/usr/sbin/nologin
+list:x:38:38:Mailing List Manager:/var/list:/usr/sbin/nologin
+irc:x:39:39:ircd:/run/ircd:/usr/sbin/nologin
+_apt:x:42:65534::/nonexistent:/usr/sbin/nologin
+nobody:x:65534:65534:nobody:/nonexistent:/usr/sbin/nologin
+systemd-network:x:998:998:systemd Network Management:/:/usr/sbin/nologin
+systemd-timesync:x:996:996:systemd Time Synchronization:/:/usr/sbin/nologin
+dhcpcd:x:100:65534:DHCP Client Daemon,,,:/usr/lib/dhcpcd:/bin/false
+messagebus:x:101:101::/nonexistent:/usr/sbin/nologin
+syslog:x:102:102::/nonexistent:/usr/sbin/nologin
+systemd-resolve:x:991:991:systemd Resolver:/:/usr/sbin/nologin
+uuidd:x:103:103::/run/uuidd:/usr/sbin/nologin
+usbmux:x:104:46:usbmux daemon,,,:/var/lib/usbmux:/usr/sbin/nologin
+tss:x:105:105:TPM software stack,,,:/var/lib/tpm:/bin/false
+systemd-oom:x:990:990:systemd Userspace OOM Killer:/:/usr/sbin/nologin
+kernoops:x:106:65534:Kernel Oops Tracking Daemon,,,:/:/usr/sbin/nologin
+whoopsie:x:107:109::/nonexistent:/bin/false
+dnsmasq:x:999:65534:dnsmasq:/var/lib/misc:/usr/sbin/nologin
+avahi:x:108:111:Avahi mDNS daemon,,,:/run/avahi-daemon:/usr/sbin/nologin
+tcpdump:x:109:112::/nonexistent:/usr/sbin/nologin
+sssd:x:110:113:SSSD system user,,,:/var/lib/sss:/usr/sbin/nologin
+speech-dispatcher:x:111:29:Speech Dispatcher,,,:/run/speech-dispatcher:/bin/false
+cups-pk-helper:x:112:114:user for cups-pk-helper service,,,:/nonexistent:/usr/sbin/nologin
+fwupd-refresh:x:989:989:Firmware update daemon:/var/lib/fwupd:/usr/sbin/nologin
+saned:x:113:116::/var/lib/saned:/usr/sbin/nologin
+geoclue:x:114:117::/var/lib/geoclue:/usr/sbin/nologin
+cups-browsed:x:115:114::/nonexistent:/usr/sbin/nologin
+hplip:x:116:7:HPLIP system user,,,:/run/hplip:/bin/false
+gnome-remote-desktop:x:988:988:GNOME Remote Desktop:/var/lib/gnome-remote-desktop:/usr/sbin/nologin
+polkitd:x:987:987:User for polkitd:/:/usr/sbin/nologin
+rtkit:x:117:119:RealtimeKit,,,:/proc:/usr/sbin/nologin
+colord:x:118:120:colord colour management daemon,,,:/var/lib/colord:/usr/sbin/nologin
+gnome-initial-setup:x:119:65534::/run/gnome-initial-setup/:/bin/false
+gdm:x:120:121:Gnome Display Manager:/var/lib/gdm3:/bin/false
+nm-openvpn:x:121:122:NetworkManager OpenVPN,,,:/var/lib/openvpn/chroot:/usr/sbin/nologin
+kisyamane:x:1000:1000:kisyamane:/home/kisyamane:/bin/bash
+user1:x:1001:1001::/home/user1:/bin/sh
+user2:x:1002:1002::/home/user2:/bin/sh
+user3:x:1003:1003::/home/user3:/bin/sh
+Вс 23 мар 2025 01:57:53 MSK
+kisyamane@Ubuntu:~/os$ cat /etc/shadow && date
+cat: /etc/shadow: Отказано в доступе
+kisyamane@Ubuntu:~/leti/os$ passwd
+Смена пароля для kisyamane.
+Текущий пароль: 
+Новый пароль: 
+НЕУДАЧНЫЙ ПАРОЛЬ: Пароль идентичен предыдущему
+Новый пароль: 
+НЕУДАЧНЫЙ ПАРОЛЬ: Пароль отличается лишь регистром символов
+Новый пароль: 
+Повторите ввод нового пароля: 
+passwd: пароль успешно обновлён
+
+# Задание 9.1
+
+kisyamane@Ubuntu:~/os$ mkdir testdir && date
+Вс 23 мар 2025 01:57:53 MSK
+kisyamane@Ubuntu:~/os$ touch testdir/file1 testdir/file2 testdir/file3 && date
+Вс 23 мар 2025 01:57:53 MSK
+kisyamane@Ubuntu:~/os$ ls -l testdir && date
+итого 0
+-rw-rw-r-- 1 kisyamane kisyamane 0 мар 23 01:57 file1
+-rw-rw-r-- 1 kisyamane kisyamane 0 мар 23 01:57 file2
+-rw-rw-r-- 1 kisyamane kisyamane 0 мар 23 01:57 file3
+Вс 23 мар 2025 01:57:53 MSK
+kisyamane@Ubuntu:~/os$ chmod u+x testdir/file1 && date
+Вс 23 мар 2025 01:57:53 MSK
+kisyamane@Ubuntu:~/os$ ls -l testdir && date
+итого 0
+-rwxrw-r-- 1 kisyamane kisyamane 0 мар 23 01:57 file1
+-rw-rw-r-- 1 kisyamane kisyamane 0 мар 23 01:57 file2
+-rw-rw-r-- 1 kisyamane kisyamane 0 мар 23 01:57 file3
+Вс 23 мар 2025 01:57:53 MSK
+kisyamane@Ubuntu:~/os$ chmod 777 testdir/file1 && date
+Вс 23 мар 2025 01:57:53 MSK
+kisyamane@Ubuntu:~/os$ ls -l testdir && date
+итого 0
+-rwxrwxrwx 1 kisyamane kisyamane 0 мар 23 01:57 file1
+-rw-rw-r-- 1 kisyamane kisyamane 0 мар 23 01:57 file2
+-rw-rw-r-- 1 kisyamane kisyamane 0 мар 23 01:57 file3
+Вс 23 мар 2025 01:57:53 MSK
+kisyamane@Ubuntu:~/os$ sudo chown user1 testdir/file1 && date
+Вс 23 мар 2025 01:57:54 MSK
+kisyamane@Ubuntu:~/os$ ls -l testdir && date
+итого 0
+-rwxrwxrwx 1 user1     kisyamane 0 мар 23 01:57 file1
+-rw-rw-r-- 1 kisyamane kisyamane 0 мар 23 01:57 file2
+-rw-rw-r-- 1 kisyamane kisyamane 0 мар 23 01:57 file3
+Вс 23 мар 2025 01:57:54 MSK
+
+# Задание 9.2
+
+kisyamane@Ubuntu:~/os$ ls -l testdir && date
+итого 0
+-rwxrwxrwx 1 user1     kisyamane 0 мар 23 01:57 file1
+-rw-rw-r-- 1 kisyamane kisyamane 0 мар 23 01:57 file2
+-rw-rw-r-- 1 kisyamane kisyamane 0 мар 23 01:57 file3
+Вс 23 мар 2025 01:57:54 MSK
+kisyamane@Ubuntu:~/os$ sudo chmod u+s testdir/file1 && date
+Вс 23 мар 2025 01:57:54 MSK
+kisyamane@Ubuntu:~/os$ ls -l testdir && date
+итого 0
+-rwsrwxrwx 1 user1     kisyamane 0 мар 23 01:57 file1
+-rw-rw-r-- 1 kisyamane kisyamane 0 мар 23 01:57 file2
+-rw-rw-r-- 1 kisyamane kisyamane 0 мар 23 01:57 file3
+Вс 23 мар 2025 01:57:54 MSK
+kisyamane@Ubuntu:~/os$ rm -rf testdir
+
+# Задание 9.3
+
+kisyamane@Ubuntu:~/leti/os$ mkdir testdir && date
+Вс 23 мар 2025 02:30:33 MSK
+kisyamane@Ubuntu:~/leti/os$ touch testdir/file && date
+Вс 23 мар 2025 02:30:33 MSK
+kisyamane@Ubuntu:~/leti/os$ cd testdir/ && date
+Вс 23 мар 2025 02:30:33 MSK
+kisyamane@Ubuntu:~/leti/os/testdir$ ls -l && date
+итого 0
+-rw-rw-r-- 1 kisyamane kisyamane 0 мар 23 02:30 file
+Вс 23 мар 2025 02:30:33 MSK
+kisyamane@Ubuntu:~/leti/os/testdir$ chmod 640 file && date
+Вс 23 мар 2025 02:30:33 MSK
+kisyamane@Ubuntu:~/leti/os/testdir$ ls -l && date
+итого 0
+-rw-r----- 1 kisyamane kisyamane 0 мар 23 02:30 file
+Вс 23 мар 2025 02:30:33 MSK
+kisyamane@Ubuntu:~/leti/os/testdir$ cat file && date
+Вс 23 мар 2025 02:30:33 MSK
+kisyamane@Ubuntu:~/leti/os/testdir$ sudo useradd testuser && date
+Вс 23 мар 2025 02:30:34 MSK
+kisyamane@Ubuntu:~/leti/os/testdir$ sudo usermod -aG kisyamane testuser && date
+Вс 23 мар 2025 02:30:34 MSK
+kisyamane@Ubuntu:~/leti/os/testdir$ sudo -u testuser cat file && date
+Вс 23 мар 2025 02:30:34 MSK
+kisyamane@Ubuntu:~/leti/os/testdir$ sudo useradd anotheruser && date
+Вс 23 мар 2025 02:30:34 MSK
+kisyamane@Ubuntu:~/leti/os/testdir$ sudo -u anotheruser cat file && date
+cat: file: Отказано в доступе
+Вс 23 мар 2025 02:30:34 MSK
+
+kisyamane@Ubuntu:~/leti/os/testdir$ echo "test" > file && date
+Вс 23 мар 2025 02:30:34 MSK
+kisyamane@Ubuntu:~/leti/os/testdir$ echo "test" | sudo -u testuser tee -a test && date
+tee: test: Отказано в доступе
+Вс 23 мар 2025 02:30:34 MSK
+kisyamane@Ubuntu:~/leti/os/testdir$ echo "test" | sudo -u anotheruser tee -a test && date
+tee: test: Отказано в доступе
+Вс 23 мар 2025 02:30:34 MSK
+
+# Задание 9.4
+
+kisyamane@Ubuntu:~/leti/os$ mkdir testdir && date
+Вс 23 мар 2025 02:36:39 MSK
+kisyamane@Ubuntu:~/leti/os$ touch testdir/testfile && date
+Вс 23 мар 2025 02:36:57 MSK
+kisyamane@Ubuntu:~/leti/os$ chmod 600 testdir && date
+Вс 23 мар 2025 02:37:05 MSK
+kisyamane@Ubuntu:~/leti/os$ ls -l && date
+итого 1
+drw------- 2 kisyamane kisyamane  4096 мар 23 02:36 testdir
+Вс 23 мар 2025 02:37:16 MSK
+kisyamane@Ubuntu:~/leti/os$ ls -l testdir/
+ls: невозможно получить доступ к 'testdir/testfile': Отказано в доступе
+итого 0
+-????????? ? ? ? ?            ? testfile
+kisyamane@Ubuntu:~/leti/os$ cd testdir
+bash: cd: testdir: Отказано в доступе
+   
+kisyamane@Ubuntu:~/leti/os$ cat testdir/testfile 
+cat: testdir/testfile: Отказано в доступе
+kisyamane@Ubuntu:~/leti/os$ chmod 711 testdir && date
+Вс 23 мар 2025 02:43:24 MSK
+kisyamane@Ubuntu:~/leti/os$ ls -ld
+drwxrwxr-x 5 kisyamane kisyamane 4096 мар 23 02:36 .
+kisyamane@Ubuntu:~/leti/os$ ls -l && date
+итого 1
+drwx--x--x 2 kisyamane kisyamane  4096 мар 23 02:36 testdir
+Вс 23 мар 2025 02:44:20 MSK
+kisyamane@Ubuntu:~/leti/os$ ls -l testdir/ && date
+итого 0
+-rw-rw-r-- 1 kisyamane kisyamane 0 мар 23 02:36 testfile
+Вс 23 мар 2025 02:44:26 MSK
+kisyamane@Ubuntu:~/leti/os$ sudo -u testuser ls -l testdir && date
+[sudo] пароль для kisyamane: 
+ls: невозможно открыть каталог 'testdir': Отказано в доступе
+kisyamane@Ubuntu:~/leti/os$ sudo -u testuser cat testdir/testfile && date 
+Вс 23 мар 2025 02:46:28 MSK
+kisyamane@Ubuntu:~/leti/os$ sudo -u anotheruser cat testdir/testfile && date 
+Вс 23 мар 2025 02:47:05 MSK
+kisyamane@Ubuntu:~/leti/os$ chmod 555 testdir && date 
+Вс 23 мар 2025 02:47:23 MSK
+
+kisyamane@Ubuntu:~/leti/os$ ls -l && date
+итого 1
+dr-xr-xr-x 2 kisyamane kisyamane  4096 мар 23 02:36 testdir
+Вс 23 мар 2025 02:51:33 MSK
+kisyamane@Ubuntu:~/leti/os$ sudo -u testuser ls -l testdir && date
+итого 0
+-rw-rw-r-- 1 kisyamane kisyamane 0 мар 23 02:36 testfile
+Вс 23 мар 2025 02:52:12 MSK
+kisyamane@Ubuntu:~/leti/os$ sudo -u anotheruser ls -l testdir && date
+итого 0
+-rw-rw-r-- 1 kisyamane kisyamane 0 мар 23 02:36 testfile
+Вс 23 мар 2025 02:52:40 MSK
+kisyamane@Ubuntu:~/leti/os$ mv testdir/testfile / && date
+mv: невозможно переместить 'testdir/testfile' в '/testfile': Отказано в доступе
+kisyamane@Ubuntu:~/leti/os$ mv -u testuser testdir/testfile / && date
+mv: невозможно переместить 'testdir/testfile' в '/testfile': Отказано в доступе
+
+kisyamane@Ubuntu:~/leti/os$ chmod 000 testdir && date
+Вс 23 мар 2025 02:54:56 MSK
+kisyamane@Ubuntu:~/leti/os$ ls -l && date
+итого 1
+d--------- 2 kisyamane kisyamane  4096 мар 23 02:36 testdir
+Вс 23 мар 2025 02:56:50 MSK
+kisyamane@Ubuntu:~/leti/os$ ls -l testdir && date
+ls: невозможно открыть каталог 'testdir': Отказано в доступе
+kisyamane@Ubuntu:~/leti/os$ cd testdir && date
+bash: cd: testdir: Отказано в доступе
+kisyamane@Ubuntu:~/leti/os$ chmod 755 testdir && date
+Вс 23 мар 2025 02:57:49 MSK
+kisyamane@Ubuntu:~/leti/os$ ls -l && date
+итого 1
+drwxr-xr-x 2 kisyamane kisyamane  4096 мар 23 02:36 testdir
+Вс 23 мар 2025 02:58:05 MSK
